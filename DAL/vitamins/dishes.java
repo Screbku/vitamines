@@ -1,8 +1,8 @@
 class dishes extends Entity{
-    private long dishid;
+    private String dishid;
     private String name;
     private String link;
-    public long getDishid() {
+    public String getDishid() {
         return dishid;
     }
     public String getName() {
@@ -11,6 +11,12 @@ class dishes extends Entity{
     public String getLink() {
         return link;
     }
+    public dishes (String dishid, String name, String link) {
+        this.dishid = dishid;
+        this.name = name;
+        this.link = link;
+    }
+    /*
     void setDishid(long dishid) {
         this.dishid = dishid;
     }
@@ -20,4 +26,5 @@ class dishes extends Entity{
     void setLink(String link) {
         this.link = link;
     }
+     */
 }
