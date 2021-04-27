@@ -27,4 +27,12 @@ public class Products extends Entity{
     }
     void setProdid(String prodid) {this.prodid = prodid;}
     void setName(String name) {this.name = name;}
+    
+    public String toString() {
+        return "Products{" +
+                "prodid='" + prodid + "'" +
+                ", name='" + name + "'" +
+                ", allergenid='" + allergenid + "'" +
+                '}';
+    }
 }

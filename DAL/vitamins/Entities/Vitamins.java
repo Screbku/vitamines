@@ -15,4 +15,11 @@ public class Vitamins extends Entity{
     }
     void setVitid(String vitid) {this.vitid = vitid;}
     void setName(String name) {this.name = name;}
+    
+    public String toString() {
+        return "Vitamins{" +
+                "vitid='" + vitid + "'" +
+                ", name='" + name + "'" +
+                '}'+"\r\n";
+    }
 }

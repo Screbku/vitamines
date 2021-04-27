@@ -29,4 +29,12 @@ public class Dishes extends Entity{
     void setLink(String link) {
         this.link = link;
     }
+    
+    public String toString() {
+        return "Dishes{" +
+                "dishid='" + dishid + "'" +
+                ", name='" + name + "'" +
+                ", link='" + link + "'" +
+                '}';
+    }
 }
