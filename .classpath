@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="DAL/vitamins"/>
+	<classpathentry kind="src" path="vitamins/.mvn/wrapper"/>
+	<classpathentry kind="src" path="vitamins/src/main/java"/>
+	<classpathentry kind="src" path="vitamins/src/test/java"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
