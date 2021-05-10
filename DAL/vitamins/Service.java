@@ -34,7 +34,7 @@ public class Service {
                 count_dishes++;
                 System.out.println(e.getKey() + " : " + links.get(e.getKey()));
             }
-            if(count_dishes==10) {
+            if(count_dishes==10||e.getValue()<0) {
                 break;
             }
         }
@@ -74,7 +74,7 @@ public class Service {
     private static Map<String, ArrayList<Product>> load_dishprod() throws IOException {
         Map<String, ArrayList<Product>> res = new HashMap<>();
 
-        BufferedReader br = new BufferedReader(new FileReader(new File("DAL/prodvit.csv")));
+        BufferedReader br = new BufferedReader(new FileReader(new File("DAL/dishprod.csv")));
 
         String line;
 
