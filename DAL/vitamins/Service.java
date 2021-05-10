@@ -60,8 +60,9 @@ public class Service {
 
         for(Map.Entry<String, ArrayList<Product>> e : dishprod.entrySet()) {
             int rating = 0;
-
+            System.out.println("---------------"+e.getKey());
             for(Product p : e.getValue()) {
+            	System.out.println(p.getName());
                 rating += p.getVal() * prodrating.get(p.getName());
             }
 
@@ -81,7 +82,7 @@ public class Service {
         while((line = br.readLine())!=null) {
             String[] tmp = line.split(",");
             int n = (tmp.length - 1) / 2;
-
+            //System.out.println(line);
             ArrayList<Product> a = new ArrayList<>();
 
             for(int i = 0; i<n;i++) {
