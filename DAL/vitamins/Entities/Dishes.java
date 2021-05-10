@@ -10,7 +10,6 @@ public class Dishes extends Entity{
         this.name = name;
         this.link = link;
     }
-
     public String getDishid() {
         return dishid;
     }
@@ -28,5 +27,13 @@ public class Dishes extends Entity{
     }
     void setLink(String link) {
         this.link = link;
+    }
+    @Override
+    public String toString() {
+        return "Dishes{" +
+                "dishid='" + dishid + '\'' +
+                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
+                '}';
     }
 }

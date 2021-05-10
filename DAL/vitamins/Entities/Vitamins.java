@@ -9,6 +9,14 @@ public class Vitamins extends Entity{
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Vitamins{" +
+                "vitid='" + vitid + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public String getVitid() { return vitid; }
     public String getName() {
         return name;

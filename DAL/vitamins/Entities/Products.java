@@ -11,6 +11,8 @@ public class Products extends Entity{
         this.allergenid = allergenid;
     }
 
+
+
     public String getAllergenid() {
         return allergenid;
     }
@@ -27,4 +29,12 @@ public class Products extends Entity{
     }
     void setProdid(String prodid) {this.prodid = prodid;}
     void setName(String name) {this.name = name;}
+    @Override
+    public String toString() {
+        return "Products{" +
+                "prodid='" + prodid + '\'' +
+                ", name='" + name + '\'' +
+                ", allergenid='" + allergenid + '\'' +
+                '}';
+    }
 }
