@@ -37,7 +37,7 @@ public class Data implements IData {
             Vitamins vitamins = new Vitamins(idVitamin,nameVitamin);
             vitaminsList.add(vitamins);
         }
-
+        sc.close();
     }
 
     private void loadDishes() throws FileNotFoundException {
@@ -53,6 +53,7 @@ public class Data implements IData {
             Dishes vitamins = new Dishes(idDish,nameDish,link);
             dishesList.add(vitamins);
         }
+        sc.close();
     }
 
     private void loadProducts() throws FileNotFoundException {
@@ -68,6 +69,7 @@ public class Data implements IData {
             Products product = new Products(idProduct,nameProduct,allergenProduct);
             productsList.add(product);
         }
+        sc.close();
     }
 
     private void loadCompatibility() throws FileNotFoundException {
@@ -83,6 +85,7 @@ public class Data implements IData {
             Compatibility comp = new Compatibility(idVit1,idVit2,type);
             compatibilityList.add(comp);
         }
+        sc.close();
     }
     @Override
     public List<Dishes> getAllDishes() {
