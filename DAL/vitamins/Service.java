@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Service {
-    private static String CURRENT_VIT = "A";
+    private String CURRENT_VIT = "A";
     private Map<String, Integer> VIT_COMPABILITY;
     private Map<String, Vitamin> prodvit;
     private Map<String, Integer> prodrating;
@@ -40,7 +40,7 @@ public class Service {
         }
     }
 
-    private static Map<String, String> load_links() throws IOException {
+    private Map<String, String> load_links() throws IOException {
         Map<String, String> res = new HashMap<>();
 
         BufferedReader br = new BufferedReader(new FileReader(new File("DAL/links.csv")));
@@ -51,11 +51,11 @@ public class Service {
             String[] tmp = line.split(",");
             res.put(tmp[0], tmp[1]);
         }
-
+        br.close();
         return res;
     }
 
-    private static Map<String, Integer> compute_dishrating(Map<String, ArrayList<Product>> dishprod,Map<String, Integer> prodrating) {
+    private Map<String, Integer> compute_dishrating(Map<String, ArrayList<Product>> dishprod,Map<String, Integer> prodrating) {
         Map<String, Integer> res = new HashMap<>();
 
         for(Map.Entry<String, ArrayList<Product>> e : dishprod.entrySet()) {
@@ -71,7 +71,7 @@ public class Service {
         return res;
     }
 
-    private static Map<String, ArrayList<Product>> load_dishprod() throws IOException {
+    private Map<String, ArrayList<Product>> load_dishprod() throws IOException {
         Map<String, ArrayList<Product>> res = new HashMap<>();
 
         BufferedReader br = new BufferedReader(new FileReader(new File("DAL/dishprod.csv")));
@@ -90,11 +90,11 @@ public class Service {
 
             res.put(tmp[0], a);
         }
-
+        br.close();
         return res;
     }
 
-    private static Map<String, Integer> compute_prodrating(Map<String, Vitamin> s, Map<String, Integer> v) {
+    private Map<String, Integer> compute_prodrating(Map<String, Vitamin> s, Map<String, Integer> v) {
         Map<String, Integer> res = new HashMap<>();
 
         for(Map.Entry<String, Vitamin> e : s.entrySet()) {
@@ -106,7 +106,7 @@ public class Service {
         return res;
     }
 
-    private static Map<String, Vitamin> load_prodvit() throws IOException {
+    private Map<String, Vitamin> load_prodvit() throws IOException {
         Map<String, Vitamin> res = new HashMap<>();
 
         BufferedReader br = new BufferedReader(new FileReader(new File("DAL/prodvit.csv")));
@@ -117,11 +117,11 @@ public class Service {
             String[] tmp = line.split(",");
             res.put(tmp[0], new Vitamin(tmp[1], Integer.parseInt(tmp[2])));
         }
-
+        br.close();
         return res;
     }
 
-    private static Map<String, Integer> load_compability() throws IOException{
+    private Map<String, Integer> load_compability() throws IOException{
         Map<String, Integer> k = new HashMap<>();
 
         BufferedReader br = new BufferedReader(new FileReader(new File("DAL/comp.csv")));
@@ -141,7 +141,7 @@ public class Service {
             }
             pos++;
         }
-
+        br.close();
         return k;
     }
 
