@@ -28,7 +28,7 @@ public class Service {
     }
     public void start(){
         int count_dishes = 0;
-        System.out.println("-------------Блюда для витамина "+CURRENT_VIT+" на день---------------");
+        System.out.println("-------------Dish for day with "+CURRENT_VIT+" vitamine---------------");
         for(Map.Entry<String, Integer> e : RATEDDISH.entrySet()) {
             if(e.getValue()>=0) {
                 count_dishes++;
@@ -60,9 +60,9 @@ public class Service {
 
         for(Map.Entry<String, ArrayList<Product>> e : dishprod.entrySet()) {
             int rating = 0;
-            System.out.println("---------------"+e.getKey());
+            
             for(Product p : e.getValue()) {
-            	System.out.println(p.getName());
+            	
                 rating += p.getVal() * prodrating.get(p.getName());
             }
 
