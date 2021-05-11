@@ -43,7 +43,7 @@ public class Service {
     private Map<String, String> load_links() throws IOException {
         Map<String, String> res = new HashMap<>();
 
-        BufferedReader br = new BufferedReader(new FileReader(new File("DAL/links.csv")));
+        BufferedReader br = new BufferedReader(new FileReader(new File("links.csv")));
 
         String line;
 
@@ -110,7 +110,7 @@ public class Service {
     private Map<String, Vitamin> load_prodvit() throws IOException {
         Map<String, Vitamin> res = new HashMap<>();
 
-        BufferedReader br = new BufferedReader(new FileReader(new File("DAL/prodvit.csv")));
+        BufferedReader br = new BufferedReader(new FileReader(new File("prodvit.csv")));
 
         String line;
 
@@ -125,7 +125,7 @@ public class Service {
     private Map<String, Integer> load_compability() throws IOException{
         Map<String, Integer> k = new HashMap<>();
 
-        BufferedReader br = new BufferedReader(new FileReader(new File("DAL/comp.csv")));
+        BufferedReader br = new BufferedReader(new FileReader(new File("comp.csv")));
 
         String line = br.readLine();
         String[] vits = line.split(",");
