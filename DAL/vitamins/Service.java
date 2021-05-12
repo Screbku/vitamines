@@ -5,34 +5,32 @@ import java.io.IOException;
 import java.util.*;
 
 public class Service {
-    private String CURRENT_VIT = "A";
-    private Map<String, Integer> VIT_COMPABILITY;
-    private Map<String, Vitamin> prodvit;
-    private Map<String, Integer> prodrating;
-    private Map<String, ArrayList<Product>> dishprod;
-    private Map<String, Integer> dishrating;
-    private Map<String, Integer> RATEDDISH;
+    private String current_vit = "A";
+    private Map<String, Integer> rateddish;
     private Map<String, String> links;
 
-    public Service(String CURRENT_VIT) {
-        this.CURRENT_VIT = CURRENT_VIT;
+    public Service(String current_vit) throws IOException {
+        this.current_vit = current_vit;
+        load();
     }
-    public void load() throws IOException {
-        VIT_COMPABILITY = load_compability();
-        prodvit = load_prodvit();
-        prodrating = compute_prodrating(prodvit, VIT_COMPABILITY);
-        dishprod = load_dishprod();
-        dishrating = compute_dishrating(dishprod, prodrating);
-        RATEDDISH = sortByValue(dishrating);
+    
+    private void load() throws IOException {
+    	Map<String, Integer> VIT_COMPABILITY = load_compability();
+        Map<String, Vitamin> prodvit = load_prodvit();
+        Map<String, Integer> prodrating = compute_prodrating(prodvit, VIT_COMPABILITY);
+        Map<String, ArrayList<Product>> dishprod = load_dishprod();
+        Map<String, Integer> dishrating = compute_dishrating(dishprod, prodrating);
+        rateddish = sortByValue(dishrating);
         links = load_links();
     }
+    
     public void start(){
         int count_dishes = 0;
-        System.out.println("-------------Dish for day with "+CURRENT_VIT+" vitamine---------------");
-        for(Map.Entry<String, Integer> e : RATEDDISH.entrySet()) {
+        System.out.println("-------------Dish for day with "+current_vit+" vitamine---------------");
+        for(Map.Entry<String, Integer> e : rateddish.entrySet()) {
             if(e.getValue()>=0) {
                 count_dishes++;
-                System.out.println(e.getKey() + " : " + links.get(e.getKey()));
+                System.out.println(e.getKey() + " : " + links.get(e.getKey()) + " rate: "+e.getValue());
             }
             if(count_dishes==10||e.getValue()<0) {
                 break;
@@ -63,7 +61,7 @@ public class Service {
             
             for(Product p : e.getValue()) {
             	
-                rating += p.getVal() * prodrating.get(p.getName());
+                rating += p.getWeight() * prodrating.get(p.getName());
             }
 
             res.put(e.getKey(), rating);
@@ -82,7 +80,6 @@ public class Service {
         while((line = br.readLine())!=null) {
             String[] tmp = line.split(",");
             int n = (tmp.length - 1) / 2;
-            //System.out.println(line);
             ArrayList<Product> a = new ArrayList<>();
 
             for(int i = 0; i<n;i++) {
@@ -99,7 +96,7 @@ public class Service {
         Map<String, Integer> res = new HashMap<>();
 
         for(Map.Entry<String, Vitamin> e : s.entrySet()) {
-            int rating = e.getValue().getVal() * v.get(e.getValue().getName());
+            int rating = e.getValue().getWeight() * v.get(e.getValue().getName());
 
             res.put(e.getKey(), rating);
         }
@@ -133,7 +130,7 @@ public class Service {
         int pos = 0;
 
         while((line = br.readLine())!=null) {
-            if(vits[pos].equals(CURRENT_VIT)) {
+            if(vits[pos].equals(current_vit)) {
                 String[] tmp = line.split(",");
                 for(int i = 0; i<tmp.length; i++) {
                     k.put(vits[i], Integer.parseInt(tmp[i]));

@@ -1,10 +1,10 @@
 public class Vitamin {
     private String name;
-    private int val;
+    private int weight;
 
-    public Vitamin(String name, int val) {
+    public Vitamin(String name, int weight) {
         this.name = name;
-        this.val = val;
+        this.weight = weight;
     }
 
     public String getName() {
@@ -15,11 +15,11 @@ public class Vitamin {
         this.name = name;
     }
 
-    public int getVal() {
-        return val;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setVal(int val) {
-        this.val = val;
+    public void setVal(int weight) {
+        this.weight = weight;
     }
 }
