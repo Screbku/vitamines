@@ -1,9 +1,9 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class Service {
@@ -24,8 +24,7 @@ public class Service {
     	Map<String, Integer> VIT_COMPABILITY = load_compability();
     	Map<String, Integer> prodrating = compute_prodrating(prodvit, VIT_COMPABILITY);
         Map<String, Integer> dishrating = compute_dishrating(dishprod, prodrating);
-        Map<String, Integer> rateddish = sortByValue(dishrating);
-        return rateddish;
+        return sortByValue(dishrating);
     }
     
     private void load() throws IOException {
@@ -35,28 +34,27 @@ public class Service {
     }
     
     public String print(Map<String, Integer> rateddish){
-    	String r = "";
+    	StringBuilder r = new StringBuilder();
         int count_dishes = 0;
-        r+=" ~ Dish for day with "+current_vit+" vitamine ~ "+"\r\n";
+        r.append(" ~ Dish for day with ").append(current_vit).append(" vitamine ~ ").append("\r\n");
         for(Map.Entry<String, Integer> e : rateddish.entrySet()) {
             if(e.getValue()>=0) {
                 count_dishes++;
-                r+=e.getKey() + " ~ " + links.get(e.getKey()) + " ~"+e.getValue()+"\r\n";
+                r.append(e.getKey()).append(" ~ ").append(links.get(e.getKey())).append(" ~").append(e.getValue()).append("\r\n");
             }
             if(count_dishes==10||e.getValue()<0) {
                 break;
             }
         }
-        return r;
+        return r.toString();
     }
 
     private Map<String, String> load_links() throws IOException {
         Map<String, String> res = new HashMap<>();
-        // new BufferedReader(new InputStreamReader(new FileInputStream( "" ), "encoding"));
-        //BufferedReader br = new BufferedReader(new FileReader(new File("DAL/links.csv")));
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("DAL/links.csv")), "UTF-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("DAL/links.csv"), StandardCharsets.UTF_8));
 
-        String line = br.readLine();
+        String line;
+        line = br.readLine();
 
         while((line = br.readLine())!=null) {
             String[] tmp = line.split(",");
@@ -86,10 +84,10 @@ public class Service {
     private Map<String, ArrayList<Product>> load_dishprod() throws IOException {
         Map<String, ArrayList<Product>> res = new HashMap<>();
 
-        //BufferedReader br = new BufferedReader(new FileReader(new File("DAL/dishprod.csv")));
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("DAL/dishprod.csv")), "UTF-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("DAL/dishprod.csv"), StandardCharsets.UTF_8));
 
-        String line = br.readLine();
+        String line;
+        line = br.readLine();
 
         while((line = br.readLine())!=null) {
             String[] tmp = line.split(",");
@@ -121,10 +119,10 @@ public class Service {
     private Map<String, Vitamin> load_prodvit() throws IOException {
         Map<String, Vitamin> res = new HashMap<>();
 
-        //BufferedReader br = new BufferedReader(new FileReader(new File("DAL/prodvit.csv")));
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("DAL/prodvit.csv")), "UTF-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("DAL/prodvit.csv"), StandardCharsets.UTF_8));
 
-        String line = br.readLine();
+        String line;
+        //line = br.readLine();
 
         while((line = br.readLine())!=null) {
             String[] tmp = line.split(",");
@@ -136,22 +134,19 @@ public class Service {
 
     private Map<String, Integer> load_compability() throws IOException{
         Map<String, Integer> k = new HashMap<>();
-        
-        
-        //BufferedReader br = new BufferedReader(new FileReader(new File("DAL/comp.csv")));
-        //BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("DAL/comp.csv")), "UTF-8"));
-        
+
         FileInputStream fis = new FileInputStream("DAL/comp.csv");
         Scanner br = new Scanner(fis);
-        
-        String line = br.nextLine();
+
+        String line;
+        //line = br.nextLine();
+        //heading
         line = br.nextLine();
         String[] vits = line.split(",");
 
         int pos = 0;
 
         while((line = br.nextLine())!=null) {
-        	
             if(vits[pos].equals(current_vit)) {
                 String[] tmp = line.split(",");
                 for(int i = 0; i<tmp.length; i++) {
@@ -167,20 +162,11 @@ public class Service {
 
     private static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map ) {
         List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-        Collections.sort( list, new Comparator<Map.Entry<K, V>>() {
-            @Override
-            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2){
-                return (o2.getValue()).compareTo( o1.getValue() );
-            }
-        });
-
+        list.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
         Map<K, V> result = new LinkedHashMap<>();
         for (Map.Entry<K, V> entry : list) {
             result.put(entry.getKey(), entry.getValue());
         }
         return result;
     }
-
 }
-
-

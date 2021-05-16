@@ -1,11 +1,8 @@
-import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
@@ -22,164 +19,110 @@ public class Main extends JFrame {
 
 	private JPanel contentPane;
 	
-	Object[][] obj;
+	Object[][] objects_in_table;
 	
-	Service serv = new Service();
+	Service service = new Service();
 	
-	private static final int NUMBER_COLUMN = 3;
+	private static final int number_column = 3;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main frame = new Main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				Main frame = new Main();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 * @throws IOException 
-	 */
 	public Main() throws IOException {
-		
-		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		add_controls();
 	}
 
 	private void add_controls() {
-		// TODO Auto-generated method stub
-		JComboBox in = new JComboBox();
-		in.setModel(new DefaultComboBoxModel(new String[] {"A", "B1", "B2", "B3", "B5", "B6", "B9", "C", "D", "E"}));
+		JComboBox<String> in = new JComboBox<>();
+		in.setModel(new DefaultComboBoxModel<>(new String[] {"A", "B1", "B2", "B3", "B5", "B6", "B9", "C", "D", "E"}));
 		in.setBounds(250, 11, 174, 22);
 		contentPane.add(in);
 		
-		JLabel lblNewLabel = new JLabel("\u0421 \u043A\u0430\u043A\u0438\u043C \u0432\u0438\u0442\u0430\u043C\u0438\u043D\u043E\u043C \u0441\u043E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0440\u0430\u0446\u0438\u043E\u043D?");
-		lblNewLabel.setBounds(10, 15, 230, 14);
-		contentPane.add(lblNewLabel);
+		JLabel question_Label = new JLabel("\u0421 \u043A\u0430\u043A\u0438\u043C \u0432\u0438\u0442\u0430\u043C\u0438\u043D\u043E\u043C \u0441\u043E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0440\u0430\u0446\u0438\u043E\u043D?");
+		question_Label.setBounds(10, 15, 230, 14);
+		contentPane.add(question_Label);
 		
-		JButton btnNewButton = new JButton("Ïîëó÷èòü!");
-		btnNewButton.setFont(new Font("Arial Black", Font.PLAIN, 11));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					
-					//new Service(in.getSelectedItem()+"").start().print();
-					Map<String, Integer> rateddish = serv.start(in.getSelectedItem()+"");
-					String h = serv.print(rateddish);
-					String rows[] = h.split("\r\n");
-					obj = new Object[rows.length][NUMBER_COLUMN];
-					for(int i = 0; i < rows.length; i++) {
-						obj[i] = new Object[3];
-						String[] tmp = rows[i].split("~");
-						for(int r = 0; r < NUMBER_COLUMN; r++) {
-							obj[i][r] = tmp[r];
-						}
-					}
-					
-					print_buttons();
-					
-					setContentPane(contentPane);
-					
-					add_controls();
-					
-					//repaint();
-					revalidate();
-					//repaint();
-					
-					//setContentPane(contentPane);
-					
-				} catch (IOException e) {
-					//out.setText(e.getMessage());
+		JButton getButton = new JButton("ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ!");
+		getButton.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		getButton.addActionListener(arg0 -> {
+			try {
+				Map<String, Integer> rateddish = service.start((String) in.getSelectedItem());
+				String h = service.print(rateddish);
+				String[] rows_in_table = h.split("\r\n");
+				objects_in_table = new Object[rows_in_table.length][number_column];
+				for(int i = 0; i < rows_in_table.length; i++) {
+					objects_in_table[i] = new Object[3];
+					String[] tmp = rows_in_table[i].split("~");
+					System.arraycopy(tmp, 0, objects_in_table[i], 0, number_column);
 				}
-			}
+				print_buttons();
+				setContentPane(contentPane);
+				add_controls();
+				revalidate();
+			} catch (IOException ignored) {}
 		});
-		btnNewButton.setBounds(310, 44, 114, 23);
-		contentPane.add(btnNewButton);
-		
-		
-		
-		
-		JLabel lblNewLabel_1 = new JLabel("Òóò ìîãëà áûòü ÍÀØÀ ðåêëàìà...");
-		lblNewLabel_1.setBounds(473, 15, 301, 14);
-		contentPane.add(lblNewLabel_1);
+		getButton.setBounds(310, 44, 114, 23);
+		contentPane.add(getButton);
+
+		JLabel ad_Label = new JLabel("Ð—Ð´ÐµÑÑŒ Ð¼Ð¾Ð³Ð»Ð° Ð±Ñ‹Ñ‚ÑŒ Ð½Ð°ÑˆÐ° Ñ€ÐµÐºÐ»Ð°Ð¼Ð°...");
+		ad_Label.setBounds(473, 15, 301, 14);
+		contentPane.add(ad_Label);
 	}
 
 	protected void print_buttons() {
-		// TODO Auto-generated method stub
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		
 		int WEIGHT = 300;
 		int HEIGHT = 40;
 		
-		String old = null;
+		String dish_name = null;
 		
-		for(int x = 0; x < obj.length; x++) {
-			for(int y = 0; y < obj[0].length; y++) {
+		for(int x = 0; x < objects_in_table.length; x++) {
+			for(int y = 0; y < objects_in_table[0].length; y++) {
 				if(y==1&&x!=0) {
-					JButton tmp = new JButton("Õî÷ó ðåöåïò "+old);
-					MyActionListener myActionListener = new MyActionListener(""+obj[x][y]);
+					JButton tmp = new JButton("Ð¥Ð¾Ñ‡Ñƒ Ñ€ÐµÑ†ÐµÐ¿Ñ‚ "+dish_name);
+					MyActionListener myActionListener = new MyActionListener((String) objects_in_table[x][y]);
 					tmp.addActionListener(myActionListener);
-					tmp.setSize(WEIGHT-5, HEIGHT-5);
-					
+					tmp.setSize(WEIGHT-10, HEIGHT-10);
 					tmp.setLocation(30+y*WEIGHT,70+x*HEIGHT);
-					
-					//jb[x][y] = tmp;
-					
 					contentPane.add(tmp);
 				}else {
-					old = ""+obj[x][y];
-					JLabel tmp = new JLabel(obj[x][y]+"");
-					tmp.setBounds(30+y*WEIGHT,70+x*HEIGHT,WEIGHT-5,HEIGHT-5);
+					dish_name = (String) objects_in_table[x][y];
+					JLabel tmp = new JLabel((String) objects_in_table[x][y]);
+					tmp.setBounds(30+y*WEIGHT,70+x*HEIGHT,WEIGHT-10,HEIGHT-10);
 					contentPane.add(tmp);
 				}
-				
-				
-				
 			}
 		}
-		
-		
 	}
 }
 
 class MyActionListener implements ActionListener {
-	
-	String s;
-	
-	public MyActionListener(String s) {
-		this.s=s.trim();
+	String link;
+	public MyActionListener(String link) {
+		this.link=link.trim();
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		// System.out.println("èäó íà "+s);
 		try {
-			Desktop.getDesktop().browse(new URI(""+s));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+			Desktop.getDesktop().browse(new URI(link));
+		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
-	
 }
