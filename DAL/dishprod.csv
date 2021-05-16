@@ -1,3 +1,4 @@
+﻿
 chicken bouillon,Chicken,1300,Bulb onions,112,Carrot,132,Celery (greens),50,Parsley (greens),40
 potato beef soup,Beef,400,Potatoes,670,Bulb onions,112,Carrot,132,Parsley (greens),40
 mushroom soup,Dried porcini mushrooms,30,Potatoes,400,Bulb onions,112,Carrot,132,Parsley (greens),40
@@ -8,7 +9,7 @@ beef stew,Beef,1000,Bulb onions,314,Wheat flour 1 grade,90
 chiken,Chicken,1200
 meat and vegetable meatballs,Ground beef,600,White cabbage,250,Bulb onions,112,Rice,110,Chicken egg,50,Sour cream 20%,260,Tomato paste,25,Parsley (greens),40
 stewed turkey in sour cream sauce,Turkey,1000,Bulb onions,560,Sour cream 20%,250
-"chicken cutlets ""Pozharskie""",Chicken,900,White bread,120,Milk 3.5%,100
+chicken cutlets "ПОЖАРСКИЕ",Chicken,900,White bread,120,Milk 3.5%,100
 fried chicken with mashed peas,Chicken,1200,Garlic,12,Peas (shelled),170,Parsley (greens),40
 pork roast with onions,Pork,1000,Bulb onions,390
 frittata with sausage and cheese,Chicken egg,360,Milk 3.5%,100,Bulb onions,100,Ham,150,Parsley (greens),40,"Cheese ""Russian"" 50%",70,Tomato (tomato),280
