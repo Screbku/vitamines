@@ -99,13 +99,13 @@ public class Main extends JFrame {
 					MyActionListener myActionListener = new MyActionListener((String) objects_in_table[x][y]);
 					tmp.addActionListener(myActionListener);
 					tmp.setSize(WEIGHT-10, HEIGHT-10);
-					tmp.setLocation(70,70+x*HEIGHT);
+					tmp.setLocation(64,70+x*HEIGHT);
 					contentPane.add(tmp);
 				}else {
 					dish_name = (String) objects_in_table[x][y];
 					JLabel tmp = new JLabel((String) objects_in_table[x][y]);
 					if (y!=0) {
-						tmp.setBounds(70+(y-1)*WEIGHT,70+x*HEIGHT,WEIGHT-10,HEIGHT-10);
+						tmp.setBounds(64+(y-1)*WEIGHT,70+x*HEIGHT,WEIGHT-10,HEIGHT-10);
 					}
 					contentPane.add(tmp);
 				}
