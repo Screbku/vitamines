@@ -87,7 +87,7 @@ public class Main extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		
-		int WEIGHT = 300;
+		int WEIGHT = 370;
 		int HEIGHT = 40;
 		
 		String dish_name = null;
@@ -95,16 +95,18 @@ public class Main extends JFrame {
 		for(int x = 0; x < objects_in_table.length; x++) {
 			for(int y = 0; y < objects_in_table[0].length; y++) {
 				if(y==1&&x!=0) {
-					JButton tmp = new JButton("Хочу рецепт "+dish_name);
+					JButton tmp = new JButton("получить рецепт "+ "\"" + dish_name + "\"");
 					MyActionListener myActionListener = new MyActionListener((String) objects_in_table[x][y]);
 					tmp.addActionListener(myActionListener);
 					tmp.setSize(WEIGHT-10, HEIGHT-10);
-					tmp.setLocation(30+y*WEIGHT,70+x*HEIGHT);
+					tmp.setLocation(70,70+x*HEIGHT);
 					contentPane.add(tmp);
 				}else {
 					dish_name = (String) objects_in_table[x][y];
 					JLabel tmp = new JLabel((String) objects_in_table[x][y]);
-					tmp.setBounds(30+y*WEIGHT,70+x*HEIGHT,WEIGHT-10,HEIGHT-10);
+					if (y!=0) {
+						tmp.setBounds(70+(y-1)*WEIGHT,70+x*HEIGHT,WEIGHT-10,HEIGHT-10);
+					}
 					contentPane.add(tmp);
 				}
 			}

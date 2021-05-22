@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,7 +35,7 @@ public class Service {
     public String print(Map<String, Integer> rateddish){
     	StringBuilder r = new StringBuilder();
         int count_dishes = 0;
-        r.append(" ~ Dish for day with ").append(current_vit).append(" vitamine ~ ").append("\r\n");
+        r.append("~ Блюда на день с витамином ").append(current_vit).append(" ~ ").append("рейтинг блюд ~").append("\r\n");
         for(Map.Entry<String, Integer> e : rateddish.entrySet()) {
             if(e.getValue()>=0) {
                 count_dishes++;
@@ -133,7 +132,7 @@ public class Service {
     }
 
     private Map<String, Integer> load_compability() throws IOException{
-        Map<String, Integer> k = new HashMap<>();
+        Map<String, Integer> ans = new HashMap<>();
 
         FileInputStream fis = new FileInputStream("DAL/comp.csv");
         Scanner br = new Scanner(fis);
@@ -150,14 +149,14 @@ public class Service {
             if(vits[pos].equals(current_vit)) {
                 String[] tmp = line.split(",");
                 for(int i = 0; i<tmp.length; i++) {
-                    k.put(vits[i], Integer.parseInt(tmp[i]));
+                    ans.put(vits[i], Integer.parseInt(tmp[i]));
                 }
                 break;
             }
             pos++;
         }
         br.close();
-        return k;
+        return ans;
     }
 
     private static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map ) {
