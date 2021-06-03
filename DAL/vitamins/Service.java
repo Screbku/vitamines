@@ -96,7 +96,6 @@ public class Service {
             for(int i = 0; i<n;i++) {
                 a.add(new Product(tmp[2*i+1],Integer.parseInt(tmp[2*i+2])));
             }
-
             res.put(tmp[0], a);
         }
         br.close();
